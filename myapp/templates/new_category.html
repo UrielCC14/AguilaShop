@@ -1,0 +1,25 @@
+{% extends 'Layouts/create_admin.html' %}
+
+{% block content %}
+<main class="container">
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
+            <form  method="post" class="card card-body mt-5 bg-transparent border-light" enctype="multipart/form-data">
+                <h1 class="text-info">Create Category</h1>
+                {% if error %}
+                <p class="text-light">{{error}}</p>
+                {% endif %}
+                {% csrf_token %}
+                {{form.as_p}}
+                <div class="m-auto">
+                    <a href="{% url 'CategoryAdmin' %}" class="btn btn-danger">Cancelar</a>
+                    <button class="btn btn-primary">Create</button>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+
+</main>
+
+{% endblock %}

@@ -1,0 +1,110 @@
+{% extends 'Layouts/articulos.html' %}
+
+<!-- Nav Bar -->
+{% block nav %}
+{% for categoria in elegir %}
+<li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="{% url 'products' categoria.id %}">{{categoria.name}}</a>
+</li>
+{% endfor %}
+{% endblock %}
+
+<!-- Block Content -->
+{% block content %}
+
+<main class="main">
+
+    <article class="article">
+
+        <div class="inicio">
+
+            <div class="inicio-content">
+                <h1 class="titulo">{{category.name}}</h1>
+                <p>Encuentra todas las {{categoria.name}} Oficiales y de la mejor calidad del Club America.</p>
+
+                {% if user.is_authenticated %}
+
+                {% else %}
+
+                <button class="btn btn-dark"><a href="{% url 'SignUp' %}">SignUp</a></button>
+                <button class="btn btn-dark"><a href="{% url 'SignIn' %}">SignIn</a></button>
+                {% endif %}
+
+            </div>
+
+            <div class="inicio-image">
+                
+            </div>
+            
+        </div>
+        
+    </article>
+
+    <section class="section">
+        <h2 class="text-center subtitulo">Todos nuestros productos</h2>
+        <div class="all-products">
+
+            {% for producto in product %}
+            <div class="producto">
+            
+                <div class="img-producto">
+                    <img src="{{ producto.imagen.url }}" alt="producto">
+                </div>
+                <div class="producto-Info">
+                    <h3 class="text-center text-danger">{{producto.name}}</h3>
+                    <p class="text-body-emphasis">Descripcion: {{producto.description}}</p>
+                    <p class="text-body-emphasis">Precio: {{producto.price}}</p>
+                    {% if producto.units == NULL %}
+                    <p class="text-body-emphasis">Unidades: No Units</p>
+                    {% else %}
+                    <p class="text-body-emphasis">Unidades: {{producto.units}}</p>
+                    {% endif %}
+                    <button class="btn btn-dark"><a href="{% url 'detail' producto.id %}" class="text-light">Comprar</a></button>
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        <h2 class="text-center mt-5">Otras Secciones</h2>
+        <div class="otros-productos">
+            {% for target in targets %}
+            <div class="target">
+                <h3>{{target.name}}</h3>
+                <a href="{% url 'products' target.id %}" class="btn btn-primary text-light">Ver</a>
+            </div>
+            {% endfor %}
+        </div>
+
+    </section>
+
+</main>
+
+<footer class="footer">
+
+    <div class="info-footer">
+
+        <h3>Mas informacon sobre AguilaShop</h3>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat culpa vel nam blanditiis, voluptatibus tempora ut, ad suscipit obcaecati natus voluptas molestias at deleniti fuga, iure magnam quo? Quis, voluptatibus fugiat quos est sapiente hic modi non, ea praesentium quod architecto cum illum explicabo possimus? Quasi ex et quod? Deserunt?</p>
+
+    </div>
+
+    <div class="footer-sosial-media">
+        <h3>Redes Sociales</h3>
+        <i class="fa-brands fa-facebook"><a href="#" class="text-light">Siguenos en Facebook</a></i>
+        <i class="fa-brands fa-instagram"><a href="#" class="text-light">Siguenos en Instagram</a></i>
+        <i class="fa-brands fa-twitter"><a href="#" class="text-light">Siguenos en Twitter</a></i>
+        <i class="fa-brands fa-tiktok"><a href="#" class="text-light">Siguenos en TikTok</a></i>
+    </div>
+    <div class="footer-contact">
+        <h3>Informacion de Contacto</h3>
+        <i class="fa-solid fa-house"><a>Ciudad de Mexico<br>Alcaldia Benito Juarez<br>Colonia Madero</a></i>
+        <i class="fa-solid fa-mobile-screen"><a>+52 55-0245-0025</a></i>
+        <i class="fa-regular fa-envelope"><a>aguilashopofficial@gmail.com</a></i>
+    </div>
+
+</footer>
+
+{% endblock %}
